@@ -1,11 +1,17 @@
+.DEFAULT_GOAL := help
 
+.PHONY: help
+help:
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+define print-target
+    @printf "Executing target: \033[36m$@\033[0m\n"
+endef
+
+# screws up make help, but anyway i need gitr :)
 BOILERPLATE_FSPATH=./../shared/boilerplate
-
 include $(BOILERPLATE_FSPATH)/gitr.mk
 
-
-
-.DEFAULT_GOAL := help
 
 .PHONY: ci
 ci: ## CI build
@@ -91,10 +97,3 @@ docker: ## run in golang container, example: make docker run="make ci"
 		-w /repo \
 		golang:1.15 $(run)
 
-.PHONY: help
-help:
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
-
-define print-target
-    @printf "Executing target: \033[36m$@\033[0m\n"
-endef
