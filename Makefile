@@ -8,9 +8,7 @@ define print-target
     @printf "Executing target: \033[36m$@\033[0m\n"
 endef
 
-# screws up make help, but anyway i need gitr :)
-BOILERPLATE_FSPATH=./../shared/boilerplate
-include $(BOILERPLATE_FSPATH)/gitr.mk
+include ./gitr.mk
 
 
 .PHONY: ci
