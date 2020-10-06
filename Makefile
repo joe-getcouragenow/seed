@@ -1,3 +1,10 @@
+
+BOILERPLATE_FSPATH=./../shared/boilerplate
+
+include $(BOILERPLATE_FSPATH)/gitr.mk
+
+
+
 .DEFAULT_GOAL := help
 
 .PHONY: ci
