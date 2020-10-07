@@ -1,0 +1,4 @@
+cluster_name: test-cluster
+nats_cluster_size: "1"
+protoc_version: 3.8.0
+stan_cluster_size: "1"

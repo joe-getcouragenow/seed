@@ -10,6 +10,11 @@ endef
 
 include ./gitr.mk
 
+GO_PATH=$(shell go env GOPATH)
+MAGE=go run mage.go
+mage:
+	go mod tidy
+	${MAGE} -l
 
 .PHONY: ci
 ci: ## CI build
