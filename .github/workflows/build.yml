@@ -15,7 +15,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         go-version: [1.15.2]
-        target: ["ci","mage"]
+        target: ["ci"]
 
     runs-on: ${{ matrix.os }}
     steps:
