@@ -1,3 +1,4 @@
+// main for mage
 package main
 
 import (
