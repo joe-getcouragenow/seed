@@ -28,7 +28,7 @@ mage-install:
 
 .PHONY: ci
 ci: ## CI build
-ci: install mage mage-build generate build lint test mod-tidy build-snapshot diff
+ci: install generate build lint test mod-tidy build-snapshot diff
 
 .PHONY: dev
 dev: ## fast build

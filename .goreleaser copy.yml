@@ -12,10 +12,7 @@ builds:
     - linux
     - windows
   goarch:
-    - 386
     - amd64
-    - arm
-    - arm64
 - main: ./cmd/cli/main.go
   id: cli
   binary: cli
@@ -26,10 +23,7 @@ builds:
     - linux
     - windows
   goarch:
-    - 386
     - amd64
-    - arm
-    - arm64
 archives:
 - name_template: '{{ .ProjectName }}_{{.Tag}}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
   format_overrides:
