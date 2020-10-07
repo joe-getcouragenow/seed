@@ -113,7 +113,7 @@ diff: ## git diff
 release: ## goreleaser --rm-dist
 	$(call print-target)
 	# ~/.config/goreleaser/github_token
-	go install github.com/goreleaser/goreleaser
+	#go install github.com/goreleaser/goreleaser
 	goreleaser --rm-dist
 
 	#  cgo not being supported by goreleaser. So how the hell can we build the Mobile and Desktop ?
