@@ -5,7 +5,5 @@ go 1.15
 require (
 	github.com/golangci/golangci-lint v1.31.0
 	github.com/goreleaser/goreleaser v0.143.0
-	github.com/kraman/mage-helpers v0.0.0-20190719043249-9c3d9cb7888e
-	github.com/magefile/mage v1.10.0
-	golang.org/x/tools v0.0.0-20201005185003-576e169c3de7
+	golang.org/x/tools v0.0.0-20201007032633-0806396f153e
 )

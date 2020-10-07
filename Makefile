@@ -17,16 +17,18 @@ mage:
 	${MAGE} -l
 
 mage-build: mage-install
-	# cant call this because mage is NOT installed in CI
 	mage -compile ./mage-bin
+
+LIB_MAGE=github.com/magefile/mage
+LIB_MAGE_FSPATH=$(GOPATH)/src/$(LIB_MAGE)
 mage-install:
-	rm -rf ./mage
-	git clone https://github.com/magefile/mage
-	cd mage && go run bootstrap.go
+	rm -rf $(LIB_MAGE_FSPATH)
+	git clone https://$(LIB_MAGE) $(LIB_MAGE_FSPATH)
+	cd $(LIB_MAGE_FSPATH) && go run bootstrap.go
 
 .PHONY: ci
 ci: ## CI build
-ci: install mage mage-build generate build lint test mod-tidy build-snapshot diff
+ci: install generate build lint test mod-tidy build-snapshot diff
 
 .PHONY: dev
 dev: ## fast build
@@ -57,7 +59,7 @@ build: ## go build
 .PHONY: fmt
 fmt: ## goimports
 	$(call print-target)
-	goimports -l -w -local github.com/golang-templates/seed . || true
+	goimports -l -w -local github.com/getcouragenow/seed . || true
 
 .PHONY: lint
 lint: ## golangci-lint
@@ -100,6 +102,7 @@ release: ## goreleaser --rm-dist
 .PHONY: run
 run: ## go run
 	@go run -race ./cmd/seed
+	@go run -race ./cmd/cli
 
 .PHONY: docker
 docker: ## run in golang container, example: make docker run="make ci"
