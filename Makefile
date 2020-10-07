@@ -16,9 +16,12 @@ mage:
 	go mod tidy
 	${MAGE} -l
 
+mage-build:
+	mage -compile ./mage-bin
+
 .PHONY: ci
 ci: ## CI build
-ci: install generate build lint test mod-tidy build-snapshot diff
+ci: install mage mage-build generate build lint test mod-tidy build-snapshot diff
 
 .PHONY: dev
 dev: ## fast build
