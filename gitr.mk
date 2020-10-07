@@ -168,7 +168,7 @@ gitr-tag-create:
 	git tag $(GITR_TAG_VERSION)
 
 	# push it up
-	git push origin --tags
+	#git push origin --tags
 
 ## Deletes a tag.
 gitr-tag-delete:
