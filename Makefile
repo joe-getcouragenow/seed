@@ -1,5 +1,6 @@
 .DEFAULT_GOAL := help
 
+
 .PHONY: help
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -51,11 +52,25 @@ generate: ## go generate
 	$(call print-target)
 	go generate ./...
 
+.PHONY: run
+run: ## go run
+	# Has to be edited by developer.
+	@go run -race ./cmd/seed
+	@go run -race ./cmd/cli
+
 .PHONY: build
 build: ## go build
 	$(call print-target)
-	go build -o ./bin-all/seed ./cmd/seed
-	go build -o ./bin-all/cli ./cmd/cli
+	# Has to be edited by developer. 
+	@go build -o ./bin-all/seed ./cmd/seed
+	@go build -o ./bin-all/cli ./cmd/cli
+
+.PHONY: docker
+docker: ## run in golang container, example: make docker run="make ci"
+	docker run --rm \
+		-v $(CURDIR):/repo $(args) \
+		-w /repo \
+		golang:1.15 $(run)
 
 .PHONY: fmt
 fmt: ## goimports
@@ -100,15 +115,5 @@ release: ## goreleaser --rm-dist
 	go install github.com/goreleaser/goreleaser
 	goreleaser --rm-dist
 
-.PHONY: run
-run: ## go run
-	@go run -race ./cmd/seed
-	@go run -race ./cmd/cli
 
-.PHONY: docker
-docker: ## run in golang container, example: make docker run="make ci"
-	docker run --rm \
-		-v $(CURDIR):/repo $(args) \
-		-w /repo \
-		golang:1.15 $(run)
 

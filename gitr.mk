@@ -20,12 +20,23 @@ GITR_REPO_ABS_FSPATH=$(GOPATH)/src/$(GITR_SERVER)/$(GITR_ORG_FORK)/$(GITR_REPO_N
 
 # remove the "v" prefix
 GITR_VERSION ?= $(shell echo $(TAGGED_VERSION) | cut -c 2-)
-
-GITR_COMMIT_MESSAGE ?= autocommit
-
-
 #GITR_BRANCH_NAME=main # Later for gitea
 GITR_BRANCH_NAME=master
+
+
+### Variables passed in by dev
+
+# EG: make M='a' T='v1.1.1' gitr-print
+
+# M for commit message
+#GITR_COMMIT_MESSAGE ?= autocommit
+GITR_COMMIT_MESSAGE = $(M)
+
+# T for Tag 
+#GITR_TAG_VERSION ?= NULL
+GITR_TAG_VERSION ?= $(T)
+
+
 
 
 ## Prints the git setting
@@ -46,7 +57,8 @@ gitr-print:
 	@echo GITR_REPO_ABS_FSPATH: 		$(GITR_REPO_ABS_FSPATH)
 
 	@echo ---
-	@echo GITR_VERSION: 				$(GITR_VERSION)
+	@echo GITR_COMMIT_MESSAGE: 			$(GITR_COMMIT_MESSAGE)
+	@echo GITR_TAG_VERSION: 			$(GITR_TAG_VERSION)
 	@echo GITR_LAST_TAG:				$(GITR_LAST_TAG)
 	
 	@echo
@@ -153,7 +165,7 @@ gitr-upstream-merge:
 gitr-tag-create:
 	# this will create a local tag on your current branch and push it to Github.
 
-	git tag $(GIT_TAG_NAME)
+	git tag $(GITR_TAG_VERSION)
 
 	# push it up
 	git push origin --tags
@@ -162,8 +174,8 @@ gitr-tag-create:
 gitr-tag-delete:
 	# this will delete a local tag and push that to Github
 
-	git push --delete origin $(GIT_TAG_NAME)
-	git tag -d $(GIT_TAG_NAME)
+	git push --delete origin $(GITR_TAG_VERSION)
+	git tag -d $(GITR_TAG_VERSION)
 
 ## GIT-RELEASE
 
