@@ -174,8 +174,13 @@ gitr-tag-create:
 gitr-tag-delete:
 	# this will delete a local tag and push that to Github
 
-	git push --delete origin $(GITR_TAG_VERSION)
+	# local
 	git tag -d $(GITR_TAG_VERSION)
+
+	# remote
+	#git push --delete origin $(GITR_TAG_VERSION)
+
+	
 
 ## GIT-RELEASE
 
