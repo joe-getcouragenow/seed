@@ -16,8 +16,13 @@ mage:
 	go mod tidy
 	${MAGE} -l
 
-mage-build:
+mage-build: mage-install
+	# cant call this because mage is NOT installed in CI
 	mage -compile ./mage-bin
+mage-install:
+	rm -rf ./mage
+	git clone https://github.com/magefile/mage
+	cd mage && go run bootstrap.go
 
 .PHONY: ci
 ci: ## CI build
