@@ -54,7 +54,8 @@ generate: ## go generate
 .PHONY: build
 build: ## go build
 	$(call print-target)
-	go build -o /dev/null ./...
+	go build -o ./bin-all/seed ./cmd/seed
+	go build -o ./bin-all/cli ./cmd/cli
 
 .PHONY: fmt
 fmt: ## goimports

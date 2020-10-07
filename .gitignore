@@ -41,3 +41,6 @@ dist/
 
 # mage
 mage-bin
+
+# cmd
+bin-all/
