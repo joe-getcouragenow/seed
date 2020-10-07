@@ -116,5 +116,6 @@ release: ## goreleaser --rm-dist
 	go install github.com/goreleaser/goreleaser
 	goreleaser --rm-dist
 
+	#  cgo not being supported by goreleaser. So how the hell can we build the Mobile and Desktop ?
 
 
