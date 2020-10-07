@@ -1,5 +1,7 @@
 // +build tools
 
+// upgrade to this.
+// https://github.com/izumin5210/grapi/blob/master/tools.go
 package tools
 
 // Manage tool dependencies via go.mod.
