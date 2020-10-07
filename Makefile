@@ -112,6 +112,7 @@ diff: ## git diff
 .PHONY: release
 release: ## goreleaser --rm-dist
 	$(call print-target)
+	# ~/.config/goreleaser/github_token
 	go install github.com/goreleaser/goreleaser
 	goreleaser --rm-dist
 
